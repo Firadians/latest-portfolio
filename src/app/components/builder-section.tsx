@@ -74,7 +74,7 @@ export function BuilderSection() {
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            I don't just write code — I craft experiences. Here's what drives my
+            I craft product experiences through code. Here is what drives my
             work.
           </motion.p>
         </motion.div>

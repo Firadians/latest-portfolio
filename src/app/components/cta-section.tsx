@@ -65,8 +65,8 @@ export function CtaSection() {
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.4 }}
           >
-            Whether you need a mobile app, a product consultant, or a full-stack solution,
-            I'm here to help turn your ideas into reality.
+            Let's collaborate to build scalable mobile products with strong UX,
+            measurable business impact, and fast iteration cycles.
           </motion.p>
 
           {/* CTA Buttons */}
@@ -101,7 +101,7 @@ export function CtaSection() {
 
             {/* WhatsApp CTA */}
             <motion.a
-              href="https://wa.me/6281234567890"
+              href="https://wa.me/6287859218995"
               target="_blank"
               rel="noopener noreferrer"
               className="px-8 py-4 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-lg shadow-lg shadow-green-600/30 hover:shadow-green-600/50 transition-all duration-300"
@@ -116,7 +116,7 @@ export function CtaSection() {
 
             {/* Download Resume */}
             <motion.a
-              href="#"
+              href="/CV_Muhammad_Firdaus_Ardiansyah.pdf"
               download
               className="px-8 py-4 bg-zinc-800 hover:bg-zinc-700 text-white font-semibold rounded-lg border border-cyan-500/30 hover:border-cyan-500 transition-all duration-300"
               whileHover={{ scale: 1.05, y: -2 }}
@@ -136,23 +136,23 @@ export function CtaSection() {
             animate={isInView ? { opacity: 1 } : {}}
             transition={{ delay: 0.8 }}
           >
-            <p className="text-zinc-500 mb-8">Trusted by clients worldwide</p>
+            <p className="text-zinc-500 mb-8">Recent delivery highlights</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">48h</div>
-                <div className="text-sm text-zinc-500">Avg. Response Time</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">30%</div>
+                <div className="text-sm text-zinc-500">Faster Time-to-Market</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">100%</div>
-                <div className="text-sm text-zinc-500">On-Time Delivery</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">25%</div>
+                <div className="text-sm text-zinc-500">Less Overdevelopment</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">15+</div>
-                <div className="text-sm text-zinc-500">Projects Completed</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">40%</div>
+                <div className="text-sm text-zinc-500">Fewer Post-Release Issues</div>
               </div>
               <div className="text-center">
-                <div className="text-3xl font-bold text-cyan-400 mb-2">98%</div>
-                <div className="text-sm text-zinc-500">Client Satisfaction</div>
+                <div className="text-3xl font-bold text-cyan-400 mb-2">97%</div>
+                <div className="text-sm text-zinc-500">Fetch Performance Gain</div>
               </div>
             </div>
           </motion.div>

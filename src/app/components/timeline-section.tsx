@@ -7,33 +7,33 @@ const experiences = [
   {
     year: "2024 - Present",
     title: "Product Manager & Mobile Developer",
-    company: "Tech Startup",
+    company: "Primuse Group - PT Five Elements Agency",
     description:
-      "Leading product strategy while building cross-platform mobile apps. Managing full product lifecycle from conception to launch.",
+      "Launched 2 mobile products end-to-end, reduced time-to-market by around 30%, and improved cross-team integration across backend, web, and POS systems.",
     icon: Briefcase,
   },
   {
-    year: "2023 - 2024",
+    year: "Nov 2024 - Dec 2024",
     title: "Flutter Developer",
-    company: "Freelance / Contract",
+    company: "Uterx Healthcare Private Limited (Contract)",
     description:
-      "Delivered multiple mobile apps for clients, specializing in AI integrations, payment systems, and real-time features.",
+      "Worked as a contract developer to troubleshoot and resolve Flutter app issues while maintaining clean, documented, and maintainable code.",
     icon: Briefcase,
   },
   {
-    year: "2022 - 2023",
+    year: "Aug 2023 - Dec 2023",
     title: "Full Stack Mobile Developer",
-    company: "Enterprise Solutions",
+    company: "PT Petrokimia Gresik",
     description:
-      "Built internal enterprise mobile applications with Firebase, AWS, and REST APIs. Focused on scalability and performance.",
+      "Delivered 2 internal mobile applications with 100% UAT success and achieved cross-device compatibility across Android and iOS test devices.",
     icon: Briefcase,
   },
   {
-    year: "2018 - 2022",
-    title: "Computer Science",
-    company: "University",
+    year: "2020 - 2024",
+    title: "B.Sc. in Computer Science",
+    company: "Brawijaya University",
     description:
-      "Studied software engineering, algorithms, and mobile development. Built foundational knowledge in product thinking.",
+      "Graduated with GPA 3.80/4.00 with focus on software engineering, mobile development, and system design.",
     icon: GraduationCap,
   },
 ];

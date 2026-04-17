@@ -11,13 +11,13 @@ export function AboutSection() {
       icon: Code2,
       title: "Flutter Expert",
       description:
-        "3+ years building production-ready mobile apps with Flutter. Deep understanding of state management, performance optimization, and platform-specific implementations.",
+        "2+ years building production-ready mobile apps with Flutter and Android (Kotlin), with strong focus on performance and cross-platform delivery.",
     },
     {
       icon: Lightbulb,
       title: "Product Thinking",
       description:
-        "I don't just write code—I solve problems. Every technical decision is driven by user needs and business goals, ensuring maximum impact.",
+        "I solve product and technical problems with clear priorities. Every technical decision is driven by user needs and business goals for maximum impact.",
     },
     {
       icon: Users,
@@ -34,10 +34,10 @@ export function AboutSection() {
   ];
 
   const achievements = [
-    { label: "Active Users Across Apps", value: "10,000+" },
-    { label: "Projects Delivered", value: "15+" },
-    { label: "Client Satisfaction", value: "98%" },
-    { label: "Code Review Score", value: "4.9/5" },
+    { label: "Products Launched", value: "10+" },
+    { label: "Time-to-Market Improvement", value: "30%" },
+    { label: "UAT Success Rate", value: "100%" },
+    { label: "Data Fetch Optimization", value: "97%" },
   ];
 
   return (
@@ -98,7 +98,7 @@ export function AboutSection() {
                   I'm <span className="text-cyan-400 font-semibold">Muhammad Firdaus Ardiansyah</span>, a mobile developer and product-minded engineer who believes technology should solve real problems, not create complexity.
                 </p>
                 <p>
-                  With over 3 years of experience building production apps, I've worked across industries—from blockchain-based ticketing systems to healthcare platforms—always focusing on one thing:{" "}
+                  With over 2 years of experience building production apps, I've worked across industries—from event ticketing to healthcare platforms—always focusing on one thing:{" "}
                   <span className="text-white font-semibold">creating solutions that users actually love</span>.
                 </p>
                 <p>
@@ -210,7 +210,7 @@ export function AboutSection() {
           transition={{ delay: 1.2 }}
         >
           <blockquote className="text-xl md:text-2xl text-zinc-300 italic max-w-3xl mx-auto">
-            "I don't just build apps—I build{" "}
+            "I build{" "}
             <span className="text-cyan-400 font-semibold not-italic">
               solutions that solve real problems
             </span>{" "}

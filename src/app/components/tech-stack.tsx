@@ -5,27 +5,27 @@ import { useRef, useState } from "react";
 const techCategories = [
   {
     name: "Mobile",
-    tech: ["Flutter", "Dart", "iOS", "Android"],
+    tech: ["Flutter", "Dart", "Android (Kotlin)", "iOS"],
     color: "from-cyan-500 to-blue-500",
   },
   {
     name: "Backend",
-    tech: ["Firebase", "AWS", "REST APIs", "PostgreSQL"],
+    tech: ["REST APIs", "Express.js", "Next.js", "PHP"],
     color: "from-blue-500 to-purple-500",
   },
   {
-    name: "AI & ML",
-    tech: ["OpenAI", "LLM Integration", "ML Kit"],
+    name: "AI & Automation",
+    tech: ["LLM Integration", "ChatGPT API", "Vector Similarity", "Prompt Engineering"],
     color: "from-purple-500 to-pink-500",
   },
   {
-    name: "Payments",
-    tech: ["Stripe", "Payment Gateways", "Webhooks"],
+    name: "Payments & Analytics",
+    tech: ["Stripe", "Xendit", "Firebase Analytics", "Crashlytics"],
     color: "from-pink-500 to-red-500",
   },
   {
-    name: "DevOps",
-    tech: ["CI/CD", "Git", "App Store Deploy", "Analytics"],
+    name: "Cloud & Data",
+    tech: ["Firebase", "AWS", "PostgreSQL", "MongoDB", "Auth0"],
     color: "from-red-500 to-orange-500",
   },
 ];

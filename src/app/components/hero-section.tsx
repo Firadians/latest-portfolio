@@ -77,7 +77,7 @@ export function HeroSection() {
             >
               <Sparkles className="w-4 h-4" />
             </motion.div>
-            <span>FLUTTER DEVELOPER & PRODUCT BUILDER</span>
+            <span>MOBILE DEVELOPER & PRODUCT-MINDED ENGINEER</span>
             <motion.div
               animate={{ rotate: -360 }}
               transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
@@ -142,8 +142,8 @@ export function HeroSection() {
             animate={{ opacity: 1 }}
             transition={{ duration: 0.8, delay: 1 }}
           >
-            From NFT-based ticketing systems to AI-powered analytics dashboards — 
-            I combine product thinking with technical excellence to deliver solutions that drive real business impact.
+            Mobile Developer with 2+ years of experience in Flutter and Android (Kotlin),
+            focused on AI/LLM integration, payment systems, and scalable product delivery.
           </motion.p>
 
           {/* Key Stats */}
@@ -154,16 +154,16 @@ export function HeroSection() {
             transition={{ duration: 0.8, delay: 1.2 }}
           >
             <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">10K+</div>
-              <div className="text-sm text-zinc-500">Active Users</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">15+</div>
-              <div className="text-sm text-zinc-500">Projects Shipped</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">3+</div>
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">2+</div>
               <div className="text-sm text-zinc-500">Years Experience</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">10+</div>
+              <div className="text-sm text-zinc-500">Products Launched</div>
+            </div>
+            <div className="text-center">
+              <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">97%</div>
+              <div className="text-sm text-zinc-500">Data Fetch Optimization</div>
             </div>
           </motion.div>
 
