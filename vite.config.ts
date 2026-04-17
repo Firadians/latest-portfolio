@@ -19,7 +19,7 @@ function figmaAssetResolver() {
 export default defineConfig({
   // GitHub Pages serves project sites from `/<repo>/`.
   // Update this value if your repository name changes.
-  base: '/my-portfolio/',
+  base: '/latest-portfolio/',
   plugins: [
     figmaAssetResolver(),
     // The React and Tailwind plugins are both required for Make, even if
