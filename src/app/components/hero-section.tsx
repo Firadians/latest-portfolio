@@ -159,7 +159,7 @@ export function HeroSection() {
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">10+</div>
-              <div className="text-sm text-zinc-500">Products Launched</div>
+              <div className="text-sm text-zinc-500">Products Built</div>
             </div>
             <div className="text-center">
               <div className="text-3xl md:text-4xl font-bold text-cyan-400 mb-1">97%</div>
