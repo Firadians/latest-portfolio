@@ -71,9 +71,9 @@ export function CaseStudiesSection() {
           description: "Supported large transaction value in production",
         },
         {
-          metric: "Product Delivery",
+          metric: "Product Build",
           value: "10+",
-          description: "Mobile products launched across portfolio work",
+          description: "Product build",
         },
       ],
       gradient: "from-purple-500/20 to-pink-500/20",
@@ -121,8 +121,8 @@ export function CaseStudiesSection() {
     },
     {
       id: "rolling-loud",
-      title: "Rolling Loud Festival Companion",
-      subtitle: "Real-Time Event Coordination App",
+      title: "Rolling Loud Application",
+      subtitle: "Official-scale festival coordination on mobile",
       image: "https://images.unsplash.com/photo-1557821552-17105176677c?w=800&h=600&fit=crop",
       problem:
         "Festival visitors need a faster way to coordinate with friends, buy on-site items, and avoid long service queues in crowded venues.",
@@ -154,7 +154,7 @@ export function CaseStudiesSection() {
         {
           metric: "Delivery Scope",
           value: "End-to-End",
-          description: "Shipped complete cross-platform festival companion app",
+          description: "Shipped end-to-end Rolling Loud mobile application experience",
         },
       ],
       gradient: "from-green-500/20 to-emerald-500/20",

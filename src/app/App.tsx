@@ -3,13 +3,11 @@ import { HeroSection } from "./components/hero-section";
 import { AboutSection } from "./components/about-section";
 import { BuilderSection } from "./components/builder-section";
 import { CaseStudiesSection } from "./components/case-studies-section";
-import { ProjectStories } from "./components/project-stories";
 import { ProjectsSection } from "./components/projects-section";
 import { WorkProcessSection } from "./components/work-process-section";
 import { WorkflowSection } from "./components/workflow-section";
 import { TechStack } from "./components/tech-stack";
 import { TimelineSection } from "./components/timeline-section";
-import { PricingSection } from "./components/pricing-section";
 import { CtaSection } from "./components/cta-section";
 import { ContactSection } from "./components/contact-section";
 
@@ -29,7 +27,6 @@ export default function App() {
       <div id="case-studies">
         <CaseStudiesSection />
       </div>
-      <ProjectStories />
       <div id="projects">
         <ProjectsSection />
       </div>
@@ -44,9 +41,6 @@ export default function App() {
       </div>
       <div id="timeline">
         <TimelineSection />
-      </div>
-      <div id="pricing">
-        <PricingSection />
       </div>
       <CtaSection />
       <div id="contact">

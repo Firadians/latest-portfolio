@@ -1,125 +1,34 @@
-import { motion, useInView } from "motion/react";
+import { motion, useInView, AnimatePresence } from "motion/react";
 import { useRef, useState } from "react";
 import {
+  ChevronDown,
+  ChevronUp,
   ExternalLink,
-  Github,
   Smartphone,
-  Users,
-  TrendingUp,
   Sparkles,
-  Code2,
-  Layers,
-  Zap,
 } from "lucide-react";
-
-interface Project {
-  title: string;
-  category: string;
-  description: string;
-  longDescription: string;
-  image: string;
-  technologies: string[];
-  stats: { label: string; value: string; icon: any }[];
-  links?: { github?: string; live?: string; case?: string };
-  gradient: string;
-  highlights: string[];
-}
+import {
+  featuredProjects,
+  portfolioProjects,
+  type PortfolioProject,
+} from "../data/portfolio-projects";
+import { ProjectDetailModal } from "./project-detail-modal";
 
 export function ProjectsSection() {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
-  const [selectedProject, setSelectedProject] = useState<number | null>(null);
+  const isInView = useInView(ref, { once: true, amount: 0.08 });
+  const [hoveredId, setHoveredId] = useState<string | null>(null);
+  const [detailProjectId, setDetailProjectId] = useState<string | null>(null);
+  const [showAllProjects, setShowAllProjects] = useState(false);
 
-  const projects: Project[] = [
-    {
-      title: "Rolling Loud Festival Companion",
-      category: "Event Technology",
-      description:
-        "Cross-platform festival app with real-time friend tracking and in-app purchases",
-      longDescription:
-        "Built a festival companion app using Flutter with Mapbox 3D live location updates, in-app purchases for food and merchandise, and queue management for on-site services.",
-      image: "https://images.unsplash.com/photo-1768053921740-f645ebbe68c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["Flutter", "Mapbox 3D", "Realtime Location APIs", "In-App Purchases"],
-      stats: [
-        { label: "Platform", value: "Cross-Platform", icon: Users },
-        { label: "Core Feature", value: "Live Tracking", icon: TrendingUp },
-        { label: "Use Case", value: "Festivals", icon: Sparkles },
-      ],
-      gradient: "from-orange-500/20 to-pink-500/20",
-      highlights: [
-        "Real-time friend tracking with Mapbox 3D",
-        "In-app purchases for food and merchandise",
-        "Online queue management features",
-        "Built for high-traffic event use cases",
-      ],
-    },
-    {
-      title: "MyNanny Babysitter Finder",
-      category: "AI Matching Platform",
-      description:
-        "AI-powered babysitter matching and real-time nearby recommendation app",
-      longDescription:
-        "Implemented LLM + vector similarity matching to improve recommendation relevance, plus real-time geolocation to enable instant nearby sitter matching with dual app architecture.",
-      image: "https://images.unsplash.com/photo-1771169204703-ecc04c27a564?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["Flutter", "LLM", "Vector Similarity", "Realtime Geolocation", "Firebase"],
-      stats: [
-        { label: "Efficiency", value: ">60%", icon: TrendingUp },
-        { label: "Core", value: "AI Matching", icon: Layers },
-        { label: "Architecture", value: "Dual App", icon: Zap },
-      ],
-      gradient: "from-cyan-500/20 to-blue-500/20",
-      highlights: [
-        "LLM-based recommendation system",
-        "Vector similarity for compatibility scoring",
-        "Real-time nearby matching",
-        "Live worker availability updates",
-      ],
-    },
-    {
-      title: "P·CLUB",
-      category: "Ticketing Platform",
-      description:
-        "Digital ticketing platform for concerts, dance, ballet, and other live events",
-      longDescription:
-        "Built a product that helps users discover events, buy tickets, and manage digital tickets, including support for modern digital and NFT-style ticketing flows.",
-      image: "https://images.unsplash.com/photo-1758263995648-222571672475?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["Flutter", "Stripe", "Xendit", "REST APIs", "PostgreSQL"],
-      stats: [
-        { label: "Domain", value: "Live Events", icon: Sparkles },
-        { label: "Payments", value: "Stripe/Xendit", icon: Users },
-        { label: "Ticket Type", value: "Digital/NFT", icon: TrendingUp },
-      ],
-      gradient: "from-purple-500/20 to-pink-500/20",
-      highlights: [
-        "Event discovery and purchase flow",
-        "Digital ticket management",
-        "Modern event operations support",
-        "Built for high-volume event traffic",
-      ],
-    },
-    {
-      title: "FinanceFlow",
-      category: "Personal Finance",
-      description:
-        "Finance tracker with monthly comparisons, analytics, and savings insights",
-      longDescription:
-        "Developed an app where users can track income and expenses by category, compare current and previous month spending, and visualize trends with chart-based financial analytics.",
-      image: "https://images.unsplash.com/photo-1707779491435-000c45820db2?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      technologies: ["Flutter", "REST APIs", "Firebase", "Charts"],
-      stats: [
-        { label: "Tracking", value: "Income/Expense", icon: Users },
-        { label: "Insights", value: "Monthly Trends", icon: Code2 },
-        { label: "Output", value: "Savings Tips", icon: Zap },
-      ],
-      gradient: "from-green-500/20 to-teal-500/20",
-      highlights: [
-        "Categorized spending and earning logs",
-        "Current vs previous month analysis",
-        "Visual charts for change tracking",
-        "Automated financial recommendations",
-      ],
-    },
-  ];
+  const detailProject =
+    detailProjectId === null
+      ? null
+      : portfolioProjects.find((p) => p.id === detailProjectId) ?? null;
+
+  const otherProjects = portfolioProjects.filter((p) => !p.featured);
+
+  const openDetail = (project: PortfolioProject) => setDetailProjectId(project.id);
 
   return (
     <section
@@ -127,7 +36,6 @@ export function ProjectsSection() {
       ref={ref}
       className="relative min-h-screen py-20 overflow-hidden bg-black"
     >
-      {/* Animated grid background */}
       <div className="absolute inset-0 opacity-10">
         <motion.div
           className="absolute inset-0 bg-[linear-gradient(to_right,#06b6d4_1px,transparent_1px),linear-gradient(to_bottom,#06b6d4_1px,transparent_1px)] bg-[size:60px_60px]"
@@ -142,27 +50,27 @@ export function ProjectsSection() {
         />
       </div>
 
-      {/* Floating gradient orbs */}
       {[...Array(5)].map((_, i) => (
         <motion.div
           key={i}
           className="absolute rounded-full blur-3xl"
           style={{
-            width: `${200 + Math.random() * 200}px`,
-            height: `${200 + Math.random() * 200}px`,
-            left: `${Math.random() * 100}%`,
-            top: `${Math.random() * 100}%`,
-            background: `radial-gradient(circle, ${
-              i % 2 === 0 ? "rgba(6, 182, 212, 0.1)" : "rgba(168, 85, 247, 0.1)"
-            }, transparent)`,
+            width: `${200 + (i % 3) * 80}px`,
+            height: `${200 + (i % 3) * 80}px`,
+            left: `${(i * 17) % 85}%`,
+            top: `${(i * 23) % 70}%`,
+            background:
+              i % 2 === 0
+                ? "radial-gradient(circle, rgba(6, 182, 212, 0.12), transparent)"
+                : "radial-gradient(circle, rgba(168, 85, 247, 0.12), transparent)",
           }}
           animate={{
-            x: [0, Math.random() * 100 - 50],
-            y: [0, Math.random() * 100 - 50],
-            scale: [1, 1.2, 1],
+            x: [0, 30, 0],
+            y: [0, -20, 0],
+            scale: [1, 1.15, 1],
           }}
           transition={{
-            duration: 10 + Math.random() * 10,
+            duration: 12 + i * 2,
             repeat: Infinity,
             repeatType: "reverse",
           }}
@@ -170,9 +78,8 @@ export function ProjectsSection() {
       ))}
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-14"
           initial={{ opacity: 0, y: 20 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -189,260 +96,191 @@ export function ProjectsSection() {
             transition={{ duration: 2, repeat: Infinity }}
           >
             <Smartphone className="w-4 h-4 text-cyan-400" />
-            <span className="text-sm text-cyan-400">Featured Projects</span>
+            <span className="text-sm text-cyan-400">Projects</span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
             <span className="bg-gradient-to-r from-white via-cyan-100 to-white bg-clip-text text-transparent">
-              Building Digital Experiences
+              Featured work
             </span>
           </h2>
           <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-            A showcase of mobile applications that solve real problems and delight
-            users
+            Three flagship builds—open any card for the full story, tech stack, and links.
           </p>
         </motion.div>
 
-        {/* Projects Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-          {projects.map((project, index) => (
-            <motion.div
-              key={project.title}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-10">
+          {featuredProjects.map((project, index) => (
+            <motion.article
+              key={project.id}
               className="group relative"
-              initial={{ opacity: 0, y: 50 }}
+              initial={{ opacity: 0, y: 40 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              onHoverStart={() => setSelectedProject(index)}
-              onHoverEnd={() => setSelectedProject(null)}
+              transition={{ duration: 0.55, delay: index * 0.12 }}
+              onHoverStart={() => setHoveredId(project.id)}
+              onHoverEnd={() => setHoveredId(null)}
             >
               <motion.div
-                className="relative rounded-2xl overflow-hidden bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 hover:border-cyan-500/50 transition-all duration-500"
-                whileHover={{ y: -10 }}
+                className="relative rounded-2xl overflow-hidden bg-zinc-900/50 backdrop-blur-xl border border-zinc-800 hover:border-cyan-500/50 transition-all duration-500 cursor-pointer"
+                whileHover={{ y: -8 }}
                 animate={{
                   boxShadow:
-                    selectedProject === index
-                      ? "0 20px 60px rgba(6, 182, 212, 0.3)"
+                    hoveredId === project.id
+                      ? "0 20px 60px rgba(6, 182, 212, 0.25)"
                       : "0 0 0 rgba(6, 182, 212, 0)",
                 }}
+                onClick={() => openDetail(project)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    openDetail(project);
+                  }
+                }}
               >
-                {/* Image with overlay */}
-                <div className="relative h-64 overflow-hidden">
+                <div className="relative h-56 overflow-hidden">
                   <motion.img
                     src={project.image}
                     alt={project.title}
                     className="w-full h-full object-cover"
-                    animate={{
-                      scale: selectedProject === index ? 1.1 : 1,
-                    }}
-                    transition={{ duration: 0.6 }}
+                    animate={{ scale: hoveredId === project.id ? 1.08 : 1 }}
+                    transition={{ duration: 0.5 }}
                   />
-                  
-                  {/* Gradient overlay */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-60`}
+                    className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-55`}
                   />
-                  
-                  {/* Animated shimmer effect */}
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent"
-                    animate={{
-                      x: selectedProject === index ? ["0%", "200%"] : "0%",
-                    }}
-                    transition={{ duration: 1.5, repeat: Infinity }}
-                  />
-
-                  {/* Category badge */}
-                  <div className="absolute top-4 left-4">
-                    <motion.div
-                      className="px-3 py-1 rounded-full bg-black/50 backdrop-blur-md border border-cyan-500/30 text-xs text-cyan-400"
-                      whileHover={{ scale: 1.05 }}
-                    >
+                  <div className="absolute top-3 left-3">
+                    <span className="px-3 py-1 rounded-full bg-black/55 backdrop-blur-md border border-cyan-500/30 text-xs text-cyan-400">
                       {project.category}
-                    </motion.div>
+                    </span>
                   </div>
-
-                  {/* Stats overlay */}
-                  <div className="absolute bottom-4 left-4 right-4 flex gap-4">
-                    {project.stats.map((stat, statIndex) => {
-                      const StatIcon = stat.icon;
+                  <div className="absolute bottom-3 left-3 right-3 flex gap-2 flex-wrap">
+                    {project.stats.slice(0, 2).map((stat) => {
+                      const Icon = stat.icon;
                       return (
-                        <motion.div
-                          key={statIndex}
-                          className="flex-1 bg-black/70 backdrop-blur-md rounded-lg px-3 py-2 border border-cyan-500/20"
-                          initial={{ opacity: 0, y: 20 }}
-                          animate={
-                            selectedProject === index
-                              ? { opacity: 1, y: 0 }
-                              : { opacity: 0, y: 20 }
-                          }
-                          transition={{ delay: statIndex * 0.1 }}
+                        <div
+                          key={stat.label}
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-lg bg-black/65 backdrop-blur-md border border-cyan-500/15 text-[11px]"
                         >
-                          <div className="flex items-center gap-2">
-                            <StatIcon className="w-4 h-4 text-cyan-400" />
-                            <div>
-                              <div className="text-xs text-cyan-400 font-bold">
-                                {stat.value}
-                              </div>
-                              <div className="text-xs text-zinc-400">
-                                {stat.label}
-                              </div>
-                            </div>
-                          </div>
-                        </motion.div>
+                          <Icon className="w-3.5 h-3.5 text-cyan-400" />
+                          <span className="text-cyan-300 font-semibold">{stat.value}</span>
+                          <span className="text-zinc-500 hidden sm:inline">{stat.label}</span>
+                        </div>
                       );
                     })}
                   </div>
                 </div>
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-cyan-400 transition-colors">
-                    {project.title}
-                  </h3>
-                  <p className="text-zinc-400 mb-4">{project.description}</p>
-
-                  {/* Highlights */}
-                  <div className="mb-4 space-y-2">
-                    {project.highlights.map((highlight, hIndex) => (
-                      <motion.div
-                        key={hIndex}
-                        className="flex items-center gap-2 text-sm text-zinc-500"
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={
-                          selectedProject === index
-                            ? { opacity: 1, x: 0 }
-                            : { opacity: 0, x: -20 }
-                        }
-                        transition={{ delay: hIndex * 0.05 }}
-                      >
-                        <motion.div
-                          className="w-1 h-1 bg-cyan-400 rounded-full"
-                          animate={{
-                            scale: [1, 1.5, 1],
-                          }}
-                          transition={{
-                            duration: 2,
-                            repeat: Infinity,
-                            delay: hIndex * 0.2,
-                          }}
-                        />
-                        <span>{highlight}</span>
-                      </motion.div>
-                    ))}
+                <div className="p-5">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <h3 className="text-xl font-bold text-white group-hover:text-cyan-400 transition-colors">
+                      {project.title}
+                    </h3>
+                    <Sparkles className="w-5 h-5 text-cyan-500/80 shrink-0 opacity-0 group-hover:opacity-100 transition-opacity" />
                   </div>
-
-                  {/* Technologies */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.technologies.map((tech, techIndex) => (
-                      <motion.span
-                        key={tech}
-                        className="px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/20 text-xs text-cyan-400"
-                        initial={{ opacity: 0, scale: 0.8 }}
-                        animate={
-                          isInView ? { opacity: 1, scale: 1 } : {}
-                        }
-                        transition={{
-                          delay: 0.8 + index * 0.2 + techIndex * 0.05,
-                        }}
-                        whileHover={{ scale: 1.1, y: -2 }}
-                      >
-                        {tech}
-                      </motion.span>
-                    ))}
-                  </div>
-
-                  {/* Links */}
-                  <div className="flex gap-3">
-                    {project.links?.live && (
-                      <motion.a
-                        href={project.links.live}
-                        className="flex-1 py-2 px-4 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 text-white text-sm font-semibold flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-cyan-500/50 transition-shadow"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <ExternalLink className="w-4 h-4" />
-                        View Live
-                      </motion.a>
-                    )}
-                    {project.links?.github && (
-                      <motion.a
-                        href={project.links.github}
-                        className="py-2 px-4 rounded-lg bg-zinc-800 text-white text-sm font-semibold flex items-center justify-center gap-2 hover:bg-zinc-700 transition-colors"
-                        whileHover={{ scale: 1.02 }}
-                        whileTap={{ scale: 0.98 }}
-                      >
-                        <Github className="w-4 h-4" />
-                        Code
-                      </motion.a>
-                    )}
-                  </div>
+                  <p className="text-zinc-400 text-sm mb-4 line-clamp-2">{project.description}</p>
+                  <span className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-400">
+                    View full details
+                    <ExternalLink className="w-4 h-4" />
+                  </span>
                 </div>
-
-                {/* Hover glow effect */}
-                <motion.div
-                  className="absolute inset-0 rounded-2xl pointer-events-none"
-                  style={{
-                    background:
-                      "radial-gradient(circle at center, rgba(6, 182, 212, 0.1), transparent 70%)",
-                  }}
-                  animate={{
-                    opacity: selectedProject === index ? 1 : 0,
-                  }}
-                  transition={{ duration: 0.3 }}
-                />
               </motion.div>
-
-              {/* Floating particles around card */}
-              {selectedProject === index &&
-                [...Array(5)].map((_, i) => (
-                  <motion.div
-                    key={i}
-                    className="absolute w-1 h-1 bg-cyan-400 rounded-full"
-                    style={{
-                      left: `${Math.random() * 100}%`,
-                      top: `${Math.random() * 100}%`,
-                    }}
-                    initial={{ opacity: 0, scale: 0 }}
-                    animate={{
-                      opacity: [0, 1, 0],
-                      scale: [0, 1.5, 0],
-                      y: [0, -30],
-                    }}
-                    transition={{
-                      duration: 1.5,
-                      repeat: Infinity,
-                      delay: i * 0.2,
-                    }}
-                  />
-                ))}
-            </motion.div>
+            </motion.article>
           ))}
         </div>
 
-        {/* Bottom CTA */}
         <motion.div
-          className="mt-16 text-center"
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ delay: 1 }}
+          className="flex flex-col items-center gap-6 mb-6"
+          initial={{ opacity: 0 }}
+          animate={isInView ? { opacity: 1 } : {}}
+          transition={{ delay: 0.35 }}
         >
           <motion.button
-            className="px-8 py-4 rounded-xl bg-zinc-900 border border-cyan-500/30 text-white font-semibold hover:bg-zinc-800 transition-colors group"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            type="button"
+            onClick={() => setShowAllProjects((v) => !v)}
+            className="flex items-center gap-2 px-6 py-3 rounded-xl bg-zinc-900 border border-cyan-500/35 text-white font-semibold hover:bg-zinc-800 transition-colors"
+            whileHover={{ scale: 1.03 }}
+            whileTap={{ scale: 0.97 }}
           >
-            <span className="flex items-center gap-2">
-              View All Projects
-              <motion.div
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ExternalLink className="w-4 h-4" />
-              </motion.div>
-            </span>
+            {showAllProjects ? (
+              <>
+                Show less
+                <ChevronUp className="w-5 h-5 text-cyan-400" />
+              </>
+            ) : (
+              <>
+                See all projects ({otherProjects.length})
+                <ChevronDown className="w-5 h-5 text-cyan-400" />
+              </>
+            )}
           </motion.button>
         </motion.div>
+
+        <AnimatePresence initial={false}>
+          {showAllProjects && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.35 }}
+              className="overflow-hidden"
+            >
+              <h3 className="text-xl font-semibold text-white mb-6 text-center md:text-left">
+                More shipped work
+              </h3>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
+                {otherProjects.map((project, index) => (
+                  <motion.div
+                    key={project.id}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: index * 0.06 }}
+                    className="rounded-xl overflow-hidden bg-zinc-900/40 border border-zinc-800 hover:border-cyan-500/40 transition-colors flex flex-col"
+                  >
+                    <button
+                      type="button"
+                      onClick={() => openDetail(project)}
+                      className="text-left flex flex-col flex-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-500 rounded-xl"
+                    >
+                      <div className="relative h-40 overflow-hidden">
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-full object-cover"
+                        />
+                        <div
+                          className={`absolute inset-0 bg-gradient-to-t ${project.gradient} opacity-50`}
+                        />
+                        <span className="absolute top-2 left-2 px-2 py-0.5 rounded-full bg-black/55 text-[10px] text-cyan-400 border border-cyan-500/25">
+                          {project.category}
+                        </span>
+                      </div>
+                      <div className="p-4 flex flex-col flex-1">
+                        <h4 className="text-white font-semibold mb-1">{project.title}</h4>
+                        <p className="text-zinc-500 text-xs mb-3 line-clamp-2">{project.description}</p>
+                        <span className="mt-auto text-cyan-400 text-sm font-medium">
+                          Open details →
+                        </span>
+                      </div>
+                    </button>
+                  </motion.div>
+                ))}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
+
+      <AnimatePresence>
+        {detailProject && (
+          <ProjectDetailModal
+            key={detailProject.id}
+            project={detailProject}
+            onClose={() => setDetailProjectId(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }

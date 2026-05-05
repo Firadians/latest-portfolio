@@ -34,7 +34,7 @@ export function AboutSection() {
   ];
 
   const achievements = [
-    { label: "Products Launched", value: "10+" },
+    { label: "Products Built", value: "10+" },
     { label: "Time-to-Market Improvement", value: "30%" },
     { label: "UAT Success Rate", value: "100%" },
     { label: "Data Fetch Optimization", value: "97%" },
